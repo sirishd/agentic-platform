@@ -23,10 +23,10 @@ const palette = {
   bg:       "#080A0F",
   surface:  "rgba(255,255,255,0.03)",
   glass:    "rgba(255,255,255,0.05)",
-  glassBorder: "rgba(255,255,255,0.08)",
-  text:     "#E8E8ED",
-  textDim:  "#8B8B9E",
-  textMuted:"#55556A",
+  glassBorder: "rgba(255,255,255,0.10)",
+  text:     "#F0F0F5",
+  textDim:  "#A8A8BE",
+  textMuted:"#7A7A95",
   gov:      "#D4A853",
   loop:     "#6CB4D9",
   policyRail: "#E07A5F",
@@ -130,12 +130,12 @@ function Pill({ label, color, icon }) {
   return (
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 5,
-      padding: "5px 12px", borderRadius: 20,
+      padding: "6px 14px", borderRadius: 20,
       background: `${color}10`, border: `1px solid ${color}25`,
-      fontSize: 11, color, fontFamily: FONT_MONO,
+      fontSize: 13, color, fontFamily: FONT_MONO,
       letterSpacing: "0.03em",
     }}>
-      {icon && <span style={{ fontSize: 10, opacity: 0.7 }}>{icon}</span>}
+      {icon && <span style={{ fontSize: 12, opacity: 0.7 }}>{icon}</span>}
       {label}
     </span>
   );
@@ -200,14 +200,14 @@ function VerticalConnector({ color }) {
 function RailCard({ label, icon, color, align = "left" }) {
   return (
     <div style={{
-      padding: "14px 16px",
-      background: `${color}06`,
-      border: `1px solid ${color}18`,
+      padding: "16px 18px",
+      background: `${color}08`,
+      border: `1px solid ${color}22`,
       borderRadius: 12,
       backdropFilter: "blur(12px)",
       WebkitBackdropFilter: "blur(12px)",
       display: "flex", alignItems: "center",
-      gap: 10,
+      gap: 12,
       flexDirection: align === "right" ? "row-reverse" : "row",
     }}>
       <div style={{
@@ -215,12 +215,12 @@ function RailCard({ label, icon, color, align = "left" }) {
         background: `linear-gradient(135deg, ${color}18, ${color}08)`,
         border: `1px solid ${color}25`,
         display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: 13, color: `${color}cc`, flexShrink: 0,
+        fontSize: 15, color: `${color}dd`, flexShrink: 0,
       }}>
         {icon}
       </div>
       <span style={{
-        fontSize: 11.5, color: `${color}bb`, fontFamily: FONT_MONO,
+        fontSize: 13, color: `${color}cc`, fontFamily: FONT_MONO,
         letterSpacing: "0.03em", lineHeight: 1.4,
         textAlign: align,
       }}>
@@ -237,7 +237,7 @@ export default function App() {
   const [openFoundation, setOpenFoundation] = useState(null); // "policy" | "signal" | "knowledge" | null
   const isMobile = useIsMobile();
 
-  const GRID_COLS = isMobile ? "1fr" : "180px 40px 1fr 40px 180px";
+  const GRID_COLS = isMobile ? "1fr" : "200px 40px 1fr 40px 200px";
 
   return (
     <div style={{
@@ -275,7 +275,7 @@ export default function App() {
             padding: "6px 16px", borderRadius: 20,
             background: "rgba(255,255,255,0.04)",
             border: "1px solid rgba(255,255,255,0.06)",
-            fontSize: 11, color: palette.textDim, fontFamily: FONT_MONO,
+            fontSize: 12, color: palette.textDim, fontFamily: FONT_MONO,
             letterSpacing: "0.15em", marginBottom: 20,
           }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#6ECF97", boxShadow: "0 0 8px rgba(110,207,151,0.4)" }} />
@@ -283,7 +283,7 @@ export default function App() {
           </div>
 
           <h1 style={{
-            fontSize: isMobile ? 24 : 36, fontWeight: 700, margin: "0 0 12px",
+            fontSize: isMobile ? 28 : 40, fontWeight: 700, margin: "0 0 12px",
             letterSpacing: "-0.02em", lineHeight: 1.2,
             background: "linear-gradient(135deg, #D4A853 0%, #E8E8ED 40%, #6CB4D9 80%, #CF7EBF 100%)",
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
@@ -292,7 +292,7 @@ export default function App() {
           </h1>
 
           <p style={{
-            fontSize: 14, color: palette.textDim, margin: 0,
+            fontSize: 16, color: palette.textDim, margin: 0,
             letterSpacing: "0.02em", lineHeight: 1.6,
           }}>
             Platform-orchestrated {"\u00B7"} Knowledge-connected {"\u00B7"} Continuously learning
@@ -321,7 +321,7 @@ export default function App() {
           }}>
             <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06))" }} />
             <span style={{
-              fontSize: 10, fontFamily: FONT_MONO, letterSpacing: "0.25em",
+              fontSize: 12, fontFamily: FONT_MONO, letterSpacing: "0.25em",
               color: palette.textMuted, textTransform: "uppercase",
             }}>
               Business Engine
@@ -340,14 +340,14 @@ export default function App() {
           {!isMobile && (
             <div style={{ textAlign: "center" }}>
               <div style={{
-                fontSize: 10, fontFamily: FONT_MONO, letterSpacing: "0.2em",
+                fontSize: 12, fontFamily: FONT_MONO, letterSpacing: "0.2em",
                 color: palette.textDim, display: "flex", alignItems: "center",
                 justifyContent: "center", gap: 6,
               }}>
                 <span style={{ width: 8, height: 8, borderRadius: 3, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }} />
                 GOVERNANCE
               </div>
-              <div style={{ fontSize: 10, color: palette.textMuted, marginTop: 4, fontFamily: FONT_MONO }}>
+              <div style={{ fontSize: 12, color: palette.textMuted, marginTop: 4, fontFamily: FONT_MONO }}>
                 Policy {"\u00B7"} Approval {"\u00B7"} Override
               </div>
             </div>
@@ -368,14 +368,14 @@ export default function App() {
           {!isMobile && (
             <div style={{ textAlign: "center" }}>
               <div style={{
-                fontSize: 10, fontFamily: FONT_MONO, letterSpacing: "0.2em",
+                fontSize: 12, fontFamily: FONT_MONO, letterSpacing: "0.2em",
                 color: palette.textDim, display: "flex", alignItems: "center",
                 justifyContent: "center", gap: 6,
               }}>
                 FEEDBACK LOOP
                 <span style={{ width: 8, height: 8, borderRadius: 3, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }} />
               </div>
-              <div style={{ fontSize: 10, color: palette.textMuted, marginTop: 4, fontFamily: FONT_MONO }}>
+              <div style={{ fontSize: 12, color: palette.textMuted, marginTop: 4, fontFamily: FONT_MONO }}>
                 Signals {"\u00B7"} Embed {"\u00B7"} Retrieve
               </div>
             </div>
@@ -409,7 +409,7 @@ export default function App() {
                   hover
                   onClick={() => { setActiveLayer(isActive ? null : layer.id); setActiveTab("agents"); }}
                   style={{
-                    padding: "20px 24px",
+                    padding: "24px 28px",
                     cursor: "pointer",
                     borderColor: isActive ? `${c.accent}40` : palette.glassBorder,
                     borderRadius: isActive ? "16px 16px 0 0" : 16,
@@ -420,11 +420,11 @@ export default function App() {
                   <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
                     {/* Number badge */}
                     <div style={{
-                      width: 40, height: 40, borderRadius: 12,
+                      width: 46, height: 46, borderRadius: 12,
                       background: `linear-gradient(135deg, ${c.accent}15, ${c.accent}05)`,
                       border: `1px solid ${c.accent}30`,
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 14, fontWeight: 700, color: c.accent,
+                      fontSize: 16, fontWeight: 700, color: c.accent,
                       fontFamily: FONT_MONO, flexShrink: 0,
                     }}>
                       {layer.num}
@@ -432,12 +432,12 @@ export default function App() {
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{
-                        fontSize: 16, fontWeight: 600, color: palette.text,
-                        letterSpacing: "-0.01em", marginBottom: 3,
+                        fontSize: 19, fontWeight: 600, color: palette.text,
+                        letterSpacing: "-0.01em", marginBottom: 4,
                       }}>
                         {layer.label}
                       </div>
-                      <div style={{ fontSize: 13, color: palette.textDim }}>
+                      <div style={{ fontSize: 15, color: palette.textDim }}>
                         {layer.sublabel}
                       </div>
                     </div>
@@ -458,7 +458,7 @@ export default function App() {
                         ))}
                       </div>
                       <span style={{
-                        fontSize: 11, color: `${c.accent}cc`, fontFamily: FONT_MONO,
+                        fontSize: 13, color: `${c.accent}dd`, fontFamily: FONT_MONO,
                       }}>
                         {layer.agents.length} agents
                       </span>
@@ -513,7 +513,7 @@ export default function App() {
                             background: activeTab === tab ? `${c.accent}15` : "transparent",
                             border: activeTab === tab ? `1px solid ${c.accent}25` : "1px solid transparent",
                             color: activeTab === tab ? c.accent : palette.textMuted,
-                            fontSize: 12, fontWeight: 500, cursor: "pointer",
+                            fontSize: 14, fontWeight: 500, cursor: "pointer",
                             fontFamily: FONT_SANS, letterSpacing: "0.02em",
                             transition: "all 0.2s",
                             textTransform: "capitalize",
@@ -544,12 +544,12 @@ export default function App() {
                               </div>
                               <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{
-                                  fontSize: 13, fontWeight: 600, color: palette.text, marginBottom: 4,
+                                  fontSize: 15, fontWeight: 600, color: palette.text, marginBottom: 5,
                                 }}>
                                   {agent.name}
                                 </div>
                                 <div style={{
-                                  fontSize: 12, color: palette.textDim, lineHeight: 1.65,
+                                  fontSize: 14, color: palette.textDim, lineHeight: 1.65,
                                 }}>
                                   {agent.desc}
                                 </div>
@@ -661,7 +661,7 @@ export default function App() {
           }}>
             <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06))" }} />
             <span style={{
-              fontSize: 10, fontFamily: FONT_MONO, letterSpacing: "0.25em",
+              fontSize: 12, fontFamily: FONT_MONO, letterSpacing: "0.25em",
               color: palette.textMuted, textTransform: "uppercase",
             }}>
               Continuous Feedback Loops
@@ -696,7 +696,7 @@ export default function App() {
                   hover={hasItems}
                   onClick={hasItems ? () => setOpenFoundation(isOpen ? null : section.key) : undefined}
                   style={{
-                    padding: "16px 24px",
+                    padding: "20px 28px",
                     cursor: hasItems ? "pointer" : "default",
                     borderColor: isOpen ? `${section.color}40` : palette.glassBorder,
                     borderRadius: isOpen ? "16px 16px 0 0" : 16,
@@ -710,7 +710,7 @@ export default function App() {
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                     <div style={{
-                      width: 34, height: 34, borderRadius: 10,
+                      width: 40, height: 40, borderRadius: 10,
                       background: `linear-gradient(135deg, ${section.color}15, ${section.color}05)`,
                       border: `1px solid ${section.color}25`,
                       display: "flex", alignItems: "center", justifyContent: "center",
@@ -720,12 +720,12 @@ export default function App() {
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{
-                        fontSize: 14, fontWeight: 600, color: palette.text,
-                        letterSpacing: "-0.01em", marginBottom: 2,
+                        fontSize: 17, fontWeight: 600, color: palette.text,
+                        letterSpacing: "-0.01em", marginBottom: 3,
                       }}>
                         {section.title}
                       </div>
-                      <div style={{ fontSize: 12, color: palette.textDim }}>
+                      <div style={{ fontSize: 14, color: palette.textDim }}>
                         {section.subtitle}
                       </div>
                     </div>
@@ -761,7 +761,7 @@ export default function App() {
                       {section.items.map((item, i) => (
                         section.horizontal ? (
                           <div key={i} style={{
-                            fontSize: 11.5, color: palette.textDim,
+                            fontSize: 13.5, color: palette.textDim,
                             padding: "6px 14px",
                             display: "flex", alignItems: "center", gap: 8,
                             background: `${section.color}06`,
@@ -802,7 +802,7 @@ export default function App() {
           marginTop: 32, textAlign: "center", padding: "16px 0",
         }}>
           <span style={{
-            fontSize: 11, color: palette.textMuted,
+            fontSize: 13, color: palette.textMuted,
             display: "inline-flex", alignItems: "center", gap: 8,
             fontFamily: FONT_MONO, letterSpacing: "0.06em",
           }}>
