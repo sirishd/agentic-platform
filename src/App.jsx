@@ -272,14 +272,15 @@ export default function App() {
                     background: isActive ? `linear-gradient(135deg, ${c.bg}, ${palette.glass})` : palette.glass,
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                  {/* Top row: badge + title + chevron */}
+                  <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 14 : 20 }}>
                     {/* Number badge */}
                     <div style={{
-                      width: 52, height: 52, borderRadius: 14,
+                      width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, borderRadius: isMobile ? 12 : 14,
                       background: `linear-gradient(135deg, ${c.accent}20, ${c.accent}08)`,
                       border: `1px solid ${c.accent}40`,
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 18, fontWeight: 700, color: c.accent,
+                      fontSize: isMobile ? 16 : 18, fontWeight: 700, color: c.accent,
                       fontFamily: FONT_MONO, flexShrink: 0,
                     }}>
                       {layer.num}
@@ -287,40 +288,18 @@ export default function App() {
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{
-                        fontSize: isMobile ? 20 : 22, fontWeight: 600, color: palette.text,
-                        letterSpacing: "-0.01em", marginBottom: 6,
+                        fontSize: isMobile ? 18 : 22, fontWeight: 600, color: palette.text,
+                        letterSpacing: "-0.01em", marginBottom: 4,
                       }}>
                         {layer.label}
                       </div>
-                      <div style={{ fontSize: 16, color: palette.textDim }}>
+                      <div style={{ fontSize: isMobile ? 14 : 16, color: palette.textDim }}>
                         {layer.sublabel}
                       </div>
                     </div>
 
-                    {/* Agent count pill */}
                     <div style={{
-                      display: "flex", alignItems: "center", gap: 8,
-                      padding: "8px 16px", borderRadius: 20,
-                      background: `${c.accent}12`, border: `1px solid ${c.accent}25`,
-                    }}>
-                      <div style={{ display: "flex", gap: 4 }}>
-                        {layer.agents.map((_, j) => (
-                          <div key={j} style={{
-                            width: 7, height: 7, borderRadius: "50%",
-                            background: isActive ? c.accent : `${c.accent}60`,
-                            transition: "background 0.3s",
-                          }} />
-                        ))}
-                      </div>
-                      <span style={{
-                        fontSize: 14, color: c.accent, fontFamily: FONT_MONO,
-                      }}>
-                        {layer.agents.length} agents
-                      </span>
-                    </div>
-
-                    <div style={{
-                      fontSize: 18, color: palette.textMuted,
+                      fontSize: 18, color: palette.textMuted, flexShrink: 0,
                       transform: isActive ? "rotate(180deg)" : "none",
                       transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
                     }}>
@@ -328,22 +307,43 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Governance + Loop inline tags */}
+                  {/* Agent pill + Gov/Loop tags row */}
                   <div style={{
-                    display: "flex", flexWrap: "wrap", gap: 10, marginTop: 16,
-                    paddingTop: 14, borderTop: `1px solid rgba(255,255,255,0.06)`,
+                    display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginTop: 14,
+                    paddingTop: 12, borderTop: `1px solid rgba(255,255,255,0.06)`,
                   }}>
+                    {/* Agent count pill */}
+                    <div style={{
+                      display: "flex", alignItems: "center", gap: 6,
+                      padding: "6px 12px", borderRadius: 20,
+                      background: `${c.accent}12`, border: `1px solid ${c.accent}25`,
+                    }}>
+                      <div style={{ display: "flex", gap: 3 }}>
+                        {layer.agents.map((_, j) => (
+                          <div key={j} style={{
+                            width: 6, height: 6, borderRadius: "50%",
+                            background: isActive ? c.accent : `${c.accent}60`,
+                            transition: "background 0.3s",
+                          }} />
+                        ))}
+                      </div>
+                      <span style={{
+                        fontSize: 12, color: c.accent, fontFamily: FONT_MONO,
+                      }}>
+                        {layer.agents.length} agents
+                      </span>
+                    </div>
                     <span style={{
-                      fontSize: 12, fontFamily: FONT_MONO, color: palette.textMuted,
-                      padding: "4px 12px", borderRadius: 8,
+                      fontSize: 11, fontFamily: FONT_MONO, color: palette.textMuted,
+                      padding: "4px 10px", borderRadius: 8,
                       background: `${c.accent}08`, border: `1px solid ${c.accent}18`,
                       letterSpacing: "0.02em",
                     }}>
                       Gov: {layer.gov}
                     </span>
                     <span style={{
-                      fontSize: 12, fontFamily: FONT_MONO, color: palette.textMuted,
-                      padding: "4px 12px", borderRadius: 8,
+                      fontSize: 11, fontFamily: FONT_MONO, color: palette.textMuted,
+                      padding: "4px 10px", borderRadius: 8,
                       background: `${c.accent}08`, border: `1px solid ${c.accent}18`,
                       letterSpacing: "0.02em",
                     }}>
@@ -621,6 +621,12 @@ export default function App() {
             }} />
             Click any section to explore details
           </span>
+          <div style={{
+            marginTop: 16, fontSize: 12, color: palette.textMuted,
+            fontFamily: FONT_MONO, letterSpacing: "0.04em",
+          }}>
+            Sirish R Davuluri
+          </div>
         </div>
       </div>
 
