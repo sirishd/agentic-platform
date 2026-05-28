@@ -36,6 +36,12 @@ const layerColors = {
   operations:  { accent: "#E094D4", glow: "rgba(224,148,212,0.20)", bg: "rgba(224,148,212,0.08)", border: "rgba(224,148,212,0.25)" },
 };
 
+const readinessAccent = {
+  accent: "#F08F6B", glow: "rgba(240,143,107,0.20)", bg: "rgba(240,143,107,0.08)", border: "rgba(240,143,107,0.25)",
+};
+const platformSwatch = "#7CC8ED";
+const servicesSwatch = "#E8BE5A";
+
 /* ── Data ────────────────────────────────────────────────────────────── */
 const layers = [
   {
@@ -92,6 +98,51 @@ const knowledgeStoreItems = [
   "Vector embedding index", "Decision audit trail", "Architecture decision records",
   "Post-mortem corpus", "Runbook library", "API contract registry",
   "Customer signal store", "Code pattern library", "Incident correlation graph", "OKR-to-feature linkage map",
+];
+
+const readinessLayers = [
+  {
+    id: "models", num: "01",
+    label: "Foundation Models", sublabel: "Reasoning engines",
+    platformPct: 90,
+    platform: ["GPT-5 / o-series", "Claude Opus & Sonnet", "Gemini", "AWS Bedrock", "Azure OpenAI"],
+    services: ["Model selection & benchmarking", "Task-specific eval harness", "Cost & latency tuning"],
+  },
+  {
+    id: "runtime", num: "02",
+    label: "Agent Runtime & Orchestration", sublabel: "How agents execute, coordinate, and recover",
+    platformPct: 60,
+    platform: ["Claude Agent SDK", "OpenAI Agents", "LangGraph", "CrewAI", "AutoGen"],
+    services: ["Runtime integration with your infrastructure", "Multi-agent choreography design", "Failure recovery & retry policies"],
+  },
+  {
+    id: "knowledge", num: "03",
+    label: "Knowledge & Memory", sublabel: "Vector stores, embeddings, retrieval",
+    platformPct: 40,
+    platform: ["Pinecone, Weaviate, pgvector", "Embedding APIs", "Managed RAG (Bedrock, Vertex)"],
+    services: ["Corpus curation & ingestion pipelines", "Chunking strategy & semantic schema", "Retrieval evaluation & continuous tuning"],
+  },
+  {
+    id: "integration", num: "04",
+    label: "Tool & Integration Fabric", sublabel: "How agents read and write your systems",
+    platformPct: 25,
+    platform: ["Off-the-shelf MCP servers", "iPaaS connectors (Zapier, Workato)", "API gateways"],
+    services: ["Custom MCP servers for internal systems", "Per-agent auth & scoped permissions", "Action audit logging & replay"],
+  },
+  {
+    id: "governance", num: "05",
+    label: "Governance, Policy & Audit", sublabel: "Approval gates, ethics, compliance",
+    platformPct: 30,
+    platform: ["Policy engines (OPA, Cedar)", "Observability platforms", "PII / PHI scrubbers"],
+    services: ["Industry-specific policy design", "SOC2 / HIPAA / GDPR mapping", "Human-in-the-loop workflows"],
+  },
+  {
+    id: "custom", num: "06",
+    label: "Custom Agents & Operations", sublabel: "Where the value actually comes from",
+    platformPct: 5,
+    platform: ["Agent starter templates"],
+    services: ["Domain agent design (Strategy, PRD, Incident, etc.)", "Continuous quality monitoring & drift detection", "Prompt & tool maintenance as your systems change", "On-call & incident response for agent failures"],
+  },
 ];
 
 /* ── Glass Card ──────────────────────────────────────────────────────── */
@@ -159,6 +210,7 @@ export default function App() {
   const [activeLayer, setActiveLayer] = useState(null);
   const [activeTab, setActiveTab] = useState("agents");
   const [openFoundation, setOpenFoundation] = useState(null);
+  const [openReadiness, setOpenReadiness] = useState(null);
   const isMobile = useIsMobile();
 
   return (
@@ -603,6 +655,214 @@ export default function App() {
             );
           })}
           </div>
+        </div>
+
+        {/* ── Transition connector ── */}
+        <div style={{
+          display: "flex", justifyContent: "center", alignItems: "center",
+          padding: "8px 0",
+        }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ width: 2, height: 16, background: "linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))" }} />
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: palette.bg, border: "1.5px solid rgba(255,255,255,0.25)", boxShadow: "0 0 8px rgba(255,255,255,0.10)" }} />
+            <div style={{ width: 2, height: 16, background: "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15))" }} />
+          </div>
+        </div>
+
+        {/* ── Enterprise Readiness container ── */}
+        <div style={{
+          background: "linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.015) 100%)",
+          border: "1px solid rgba(255,255,255,0.10)",
+          borderRadius: isMobile ? 16 : 24,
+          padding: isMobile ? "24px 16px" : "40px 40px 36px",
+          position: "relative",
+          overflow: "hidden",
+        }}>
+          <div style={{
+            position: "absolute", top: 0, left: "10%", right: "10%", height: 1,
+            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)",
+          }} />
+
+          {/* Section label */}
+          <div style={{
+            display: "flex", alignItems: "center", justifyContent: "center",
+            gap: 16, marginBottom: 16,
+          }}>
+            <div style={{ flex: 1, height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08))" }} />
+            <span style={{
+              fontSize: 13, fontFamily: FONT_MONO, letterSpacing: "0.25em",
+              color: palette.textMuted, textTransform: "uppercase",
+            }}>
+              Enterprise Readiness
+            </span>
+            <div style={{ flex: 1, height: 1, background: "linear-gradient(270deg, transparent, rgba(255,255,255,0.08))" }} />
+          </div>
+
+          {/* Tagline */}
+          <p style={{
+            textAlign: "center", color: palette.textDim,
+            fontSize: isMobile ? 15 : 17, lineHeight: 1.6,
+            margin: "0 auto 32px", maxWidth: 560,
+            letterSpacing: "0.01em",
+          }}>
+            Platforms provide the plumbing. The agents and the integrations they need are still on you.
+          </p>
+
+          {/* Legend */}
+          <div style={{
+            display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 18,
+            marginBottom: 28, fontSize: 12, fontFamily: FONT_MONO,
+            color: palette.textMuted, letterSpacing: "0.06em",
+          }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <span style={{ width: 10, height: 10, borderRadius: 2, background: platformSwatch, opacity: 0.8 }} />
+              Platform-Provided
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <span style={{ width: 10, height: 10, borderRadius: 2, background: servicesSwatch, opacity: 0.8 }} />
+              Professional Services
+            </span>
+          </div>
+
+          {/* ── Readiness rows ── */}
+          {readinessLayers.map((row, i) => {
+            const c = readinessAccent;
+            const isActive = openReadiness === row.id;
+            const isLast = i === readinessLayers.length - 1;
+            const servicesPct = 100 - row.platformPct;
+
+            return (
+              <div key={row.id}>
+                <GlassCard
+                  hover
+                  onClick={() => setOpenReadiness(isActive ? null : row.id)}
+                  style={{
+                    padding: isMobile ? "20px 20px" : "28px 32px",
+                    cursor: "pointer",
+                    borderColor: isActive ? `${c.accent}50` : palette.glassBorder,
+                    borderRadius: isActive ? "16px 16px 0 0" : 16,
+                    boxShadow: isActive ? `0 6px 40px ${c.glow}, inset 0 1px 0 ${c.accent}15` : "none",
+                    background: isActive ? `linear-gradient(135deg, ${c.bg}, ${palette.glass})` : palette.glass,
+                  }}
+                >
+                  {/* Top row */}
+                  <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 14 : 20 }}>
+                    <div style={{
+                      width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, borderRadius: isMobile ? 12 : 14,
+                      background: `linear-gradient(135deg, ${c.accent}20, ${c.accent}08)`,
+                      border: `1px solid ${c.accent}40`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: isMobile ? 16 : 18, fontWeight: 700, color: c.accent,
+                      fontFamily: FONT_MONO, flexShrink: 0,
+                    }}>
+                      {row.num}
+                    </div>
+
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{
+                        fontSize: isMobile ? 18 : 22, fontWeight: 600, color: palette.text,
+                        letterSpacing: "-0.01em", marginBottom: 4,
+                      }}>
+                        {row.label}
+                      </div>
+                      <div style={{ fontSize: isMobile ? 14 : 16, color: palette.textDim }}>
+                        {row.sublabel}
+                      </div>
+                    </div>
+
+                    <div style={{
+                      fontSize: 18, color: palette.textMuted, flexShrink: 0,
+                      transform: isActive ? "rotate(180deg)" : "none",
+                      transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+                    }}>
+                      &#x2304;
+                    </div>
+                  </div>
+
+                  {/* Split bar */}
+                  <div style={{
+                    marginTop: 16, paddingTop: 14,
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                  }}>
+                    <div style={{
+                      display: "flex", justifyContent: "space-between",
+                      fontSize: 11, fontFamily: FONT_MONO, color: palette.textMuted,
+                      marginBottom: 8, letterSpacing: "0.04em",
+                    }}>
+                      <span style={{ color: platformSwatch }}>Platform &middot; {row.platformPct}%</span>
+                      <span style={{ color: servicesSwatch }}>Services &middot; {servicesPct}%</span>
+                    </div>
+                    <div style={{
+                      display: "flex", height: 6, borderRadius: 3, overflow: "hidden",
+                      background: "rgba(255,255,255,0.05)",
+                    }}>
+                      <div style={{ width: `${row.platformPct}%`, background: platformSwatch, opacity: 0.75 }} />
+                      <div style={{ width: `${servicesPct}%`, background: servicesSwatch, opacity: 0.75 }} />
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* Expanded panel */}
+                {isActive && (
+                  <div style={{
+                    background: "rgba(0,0,0,0.35)",
+                    backdropFilter: "blur(20px)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    border: `1px solid ${c.border}`,
+                    borderTop: "none",
+                    borderRadius: "0 0 16px 16px",
+                    padding: "24px 24px 28px",
+                    animation: "expandIn 0.3s cubic-bezier(0.4,0,0.2,1)",
+                  }}>
+                    <div style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                      gap: isMobile ? 20 : 24,
+                    }}>
+                      {[
+                        { title: "Platform-Provided", color: platformSwatch, items: row.platform },
+                        { title: "Professional Services", color: servicesSwatch, items: row.services },
+                      ].map((col) => (
+                        <div key={col.title}>
+                          <div style={{
+                            fontSize: 11, fontFamily: FONT_MONO, color: col.color,
+                            marginBottom: 14, letterSpacing: "0.12em", textTransform: "uppercase",
+                          }}>
+                            {col.title}
+                          </div>
+                          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                            {col.items.map((item, j) => (
+                              <div key={j} style={{
+                                display: "flex", alignItems: "flex-start", gap: 10,
+                                padding: "10px 14px",
+                                background: `${col.color}08`,
+                                border: `1px solid ${col.color}20`,
+                                borderRadius: 10,
+                                fontSize: 14, color: palette.textDim, lineHeight: 1.5,
+                              }}>
+                                <span style={{
+                                  width: 6, height: 6, borderRadius: "50%",
+                                  background: `${col.color}80`,
+                                  marginTop: 7, flexShrink: 0,
+                                }} />
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {!isLast && (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <VerticalConnector color={c.accent} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* ── Footer ── */}
